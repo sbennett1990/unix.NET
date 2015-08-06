@@ -25,7 +25,7 @@
  **)
 
 (**
- * cat - A reimplimentation of the Unix utility in F#
+ * fcat - A reimplimentation of the Unix cat utility in F#
  *
  * This program takes a list of files as its arguments and prints the 
  * contents to stdout.
