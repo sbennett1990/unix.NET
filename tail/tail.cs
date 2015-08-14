@@ -40,7 +40,7 @@ namespace tail
 	/// </summary>
 	public class tail
 	{
-		const string usage = "usage: tail [-n number] -p filepath";
+		const string usage = "usage: tail -p filepath [-n number]";
 
 		/// <summary>
 		/// Read the file given by filePath. Return an array where each entry is 
@@ -130,10 +130,6 @@ namespace tail
 			}
 			catch (IndexOutOfRangeException e) {
 				Console.WriteLine("error: invalid number of arguments");
-				Console.WriteLine(usage);
-			}
-			catch (OverflowException e) {
-				Console.WriteLine(e.Message);
 				Console.WriteLine(usage);
 			}
 			catch (Exception e) {
