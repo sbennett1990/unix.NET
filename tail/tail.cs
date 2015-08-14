@@ -105,7 +105,6 @@ namespace tail
 			/* Set up the command line flag handler(s) */
 			CommandLineArgs cmdLine = new CommandLineArgs();
 			cmdLine.PrefixRegexPatternList.Add("-{1}");
-			cmdLine.PrefixRegexPatternList.Add("/{1}");
 			
 			cmdLine.registerSpecificSwitchMatchHandler("n", (sender, e) => {
 				numLines = uint.Parse(e.Value);
