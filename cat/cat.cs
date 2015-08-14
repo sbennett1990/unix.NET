@@ -25,6 +25,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace cat
@@ -42,10 +43,12 @@ namespace cat
 		const string usage = "usage: cat [file ...]";
 
 		/// <summary>
-		/// Attempt to read and print the contents of the specified file.
+		/// Attempt to read and print the contents of the specified file(s). 
 		/// </summary>
 		/// <param name="args"></param>
 		public static void Main(string[] args) {
+			IList<string> invalidFiles = new List<string>();
+
 			// Put a newline before doing anything. Looks better.
 			Console.WriteLine();
 
@@ -59,9 +62,7 @@ namespace cat
 					string filePath = arg;
 
 					if (!File.Exists(filePath)) {
-						Console.WriteLine(
-							string.Format("cat: {0} does not exist", filePath)
-						);
+						invalidFiles.Add(filePath);
 						continue;
 					}
 
@@ -92,7 +93,14 @@ namespace cat
 					}
 				}
 				catch (Exception e) {
-					Console.WriteLine("cat: Error: " + e.Message);
+					Console.WriteLine("error: " + e.Message);
+				}
+			}
+
+			if (invalidFiles.Count > 0) {
+				Console.WriteLine();
+				foreach (string file in invalidFiles) {
+					Console.WriteLine(string.Format("error: could not find \'{0}\'", file));
 				}
 			}
 

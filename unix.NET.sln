@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "fcat", "fcat\fcat.fsproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tail", "tail\tail.csproj", "{D7842FFD-171F-46A9-ACF5-B70608A75216}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "libcmdline", "libcmdline\libcmdline.csproj", "{CCE64800-D305-4DBC-81CD-5068939CCC3E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{D7842FFD-171F-46A9-ACF5-B70608A75216}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7842FFD-171F-46A9-ACF5-B70608A75216}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7842FFD-171F-46A9-ACF5-B70608A75216}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE64800-D305-4DBC-81CD-5068939CCC3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE64800-D305-4DBC-81CD-5068939CCC3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE64800-D305-4DBC-81CD-5068939CCC3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE64800-D305-4DBC-81CD-5068939CCC3E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

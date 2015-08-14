@@ -26,6 +26,7 @@
 
 using System;
 using System.IO;
+using libcmdline;
 
 namespace tail
 {
@@ -51,7 +52,7 @@ namespace tail
 			string[] fileLines = new string[0];
 
 			if (!File.Exists(filePath)) {
-				Console.WriteLine(string.Format("error: cannot find {0}", filePath));
+				Console.WriteLine(string.Format("error: cannot find \'{0}\'", filePath));
 				return fileLines;
 			}
 
@@ -92,32 +93,33 @@ namespace tail
 			}
 		}
 
+		/// <summary>
+		/// Attempt to read a file and print the last n lines to stdout. 
+		/// </summary>
+		/// <param name="args"></param>
 		static void Main(string[] args) {
-			// Put a newline before doing anything. Looks better.
-			Console.WriteLine();
+			bool p_flag = false;			/* Determine if the -p flag was given */
+			string filePath = string.Empty;	/* Path to file */
+			uint numLines = 10;				/* Default number of lines to print */
 
-			bool p_flag = false;
-
-			/* Path to file */
-			string filePath = string.Empty;
-
-			/* Default number of lines to print */
-			uint numLines = 10;
+			/* Set up the command line flag handler(s) */
+			CommandLineArgs cmdLine = new CommandLineArgs();
+			cmdLine.PrefixRegexPatternList.Add("-{1}");
+			cmdLine.PrefixRegexPatternList.Add("/{1}");
+			
+			cmdLine.registerSpecificSwitchMatchHandler("n", (sender, e) => {
+				numLines = uint.Parse(e.Value);
+			});
+			cmdLine.registerSpecificSwitchMatchHandler("p", (sender, e) => {
+				filePath = e.Value;
+				p_flag = true;
+			});
 
 			try {
-				for (int i = 0; i < args.Length; i++) {
-					switch (args[i]) {
-						case "-n":
-							numLines = uint.Parse(args[i + 1]);
-							break;
-						case "-p":
-							filePath = args[i + 1];
-							p_flag = true;
-							break;
-						default:
-							break;
-					}
-				}
+				// Put a newline before doing anything. Looks better.
+				Console.WriteLine();
+
+				cmdLine.processCommandLineArgs(args);
 
 				if (!p_flag) {
 					Console.WriteLine("error: no file given");
@@ -143,6 +145,12 @@ namespace tail
 		Exit:
 			// Put a newline after everything is done. Looks better.
 			Console.WriteLine();
+#if DEBUG
+		foreach (string invalidArg in cmdLine.InvalidArgs) {
+			Console.WriteLine(invalidArg);
+		}
+		Console.ReadLine();
+#endif
 		}
 	}
 }
